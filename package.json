@@ -1,0 +1,28 @@
+{
+  "name": "EventArray.js",
+  "version": "1.0.0",
+  "description": "Treat Events as Arrays that can be mapped, filtered and reduced. ",
+  "main": "build/EventArray.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Omega3k/EventArray.js.git"
+  },
+  "keywords": [
+    "Event",
+    "Array"
+  ],
+  "author": "Svein Olav Risdal",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Omega3k/EventArray.js/issues"
+  },
+  "homepage": "https://github.com/Omega3k/EventArray.js",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-coffee": "^0.12.0",
+    "grunt-contrib-jshint": "^0.10.0"
+  }
+}
