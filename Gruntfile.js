@@ -1,8 +1,9 @@
 (function() {
   module.exports = function(grunt) {
-    var pkg, _;
+    var license, pkg, _;
     _ = grunt.util._;
     pkg = grunt.file.readJSON("package.json");
+    license = grunt.file.read("LICENSE");
     grunt.initConfig({
       pkg: pkg,
       watch: {
@@ -13,6 +14,10 @@
         Gruntfile: {
           files: ["src/Gruntfile.coffee"],
           tasks: ["coffee:Gruntfile", "jshint:Gruntfile"]
+        },
+        frontEnd: {
+          files: ["src/ux.coffee"],
+          tasks: ["coffee:frontEnd", "jshint:frontEnd"]
         }
       },
       coffee: {
@@ -28,6 +33,11 @@
         Gruntfile: {
           files: {
             "Gruntfile.js": ["src/Gruntfile.coffee"]
+          }
+        },
+        frontEnd: {
+          files: {
+            "src/ux.js": ["src/ux.coffee"]
           }
         }
       },
@@ -46,9 +56,13 @@
           }
         },
         EventArray: ["build/EventArray.min.js"],
-        Gruntfile: ["Gruntfile.js"]
+        Gruntfile: ["Gruntfile.js"],
+        frontEnd: ["src/ux.js"]
       },
       uglify: {
+        options: {
+          banner: "/*\n" + license + "*/\n\n"
+        },
         EventArray: {
           files: {
             "build/EventArray.min.js": ["build/EventArray.min.js"]

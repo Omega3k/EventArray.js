@@ -1,6 +1,7 @@
 module.exports = (grunt) ->
-  _   = grunt.util._
-  pkg = grunt.file.readJSON "package.json"
+  _       = grunt.util._
+  pkg     = grunt.file.readJSON "package.json"
+  license = grunt.file.read "LICENSE"
 
   grunt.initConfig
     pkg: pkg
@@ -14,6 +15,10 @@ module.exports = (grunt) ->
         files: ["src/Gruntfile.coffee"]
         tasks: ["coffee:Gruntfile", "jshint:Gruntfile"]
 
+      frontEnd:
+        files: ["src/ux.coffee"]
+        tasks: ["coffee:frontEnd", "jshint:frontEnd"]
+
     coffee:
       EventArray:
         options:
@@ -26,6 +31,10 @@ module.exports = (grunt) ->
       Gruntfile:
         files:
           "Gruntfile.js": ["src/Gruntfile.coffee"]
+
+      frontEnd:
+        files:
+          "src/ux.js": ["src/ux.coffee"]
 
     jshint:
       options:
@@ -47,8 +56,14 @@ module.exports = (grunt) ->
 
       EventArray: ["build/EventArray.min.js"]
       Gruntfile : ["Gruntfile.js"]
+      frontEnd  : ["src/ux.js"]
 
     uglify:
+      options:
+        banner: "/*\n#{ license }*/\n\n"
+        # mangle:
+        #   except: ["jQuery", "Backbone", "backwards"]
+
       EventArray:
         files:
           "build/EventArray.min.js": ["build/EventArray.min.js"]

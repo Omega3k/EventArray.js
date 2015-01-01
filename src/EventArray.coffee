@@ -1,16 +1,22 @@
-if require? then b = require 'backwards' else b = window.backwards
-throw new Error 'Could not find "backwards" module' if not b
+"use strict"
+
+if require?
+  b = require "backwards"
+else b = window.backwards
+
+throw new Error "Could not find 'backwards' module" if not b
 
 forEach     = b.forEach
 map         = b.map
 indexOf     = b.indexOf
 
-uid         = "__EventArrayHandlers-" + ( new Date() ).getTime()
+uid         = "__EventArrayHandlers-#{ ( new Date() ).getTime() }"
 doc         = window.document
 
 returnTrue  = () -> true
 returnFalse = () -> false
 identity    = (x) -> x
+copy        = map identity
 
 
 either = (a, b, c) ->
@@ -19,7 +25,7 @@ either = (a, b, c) ->
 
 
 fixEvent = (e) ->
-  event = map identity, e
+  event = copy e
 
   # The event occurred on this element. 
   if not event.target
@@ -42,7 +48,7 @@ fixEvent = (e) ->
 
   # Stop the event from bubbling
   event.stopPropagation = () ->
-    event.cancelBubble = true
+    event.cancelBubble         = true
     event.isPropagationStopped = returnTrue
     undefined
 
@@ -121,7 +127,8 @@ removeEventArrayHandlers = (htmlElement, type) ->
 
 
 uberEventHandler = (e) ->
-  e = fixEvent e or window.event if not e or not e.stopPropagation
+  if not e or not e.stopPropagation
+    e = fixEvent e or window.event
   executeHandlers e, getEventArrayHandlers @, e.type
 
 
