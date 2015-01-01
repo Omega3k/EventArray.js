@@ -44,6 +44,7 @@ fixEvent = (e) ->
   event.stopPropagation = () ->
     event.cancelBubble = true
     event.isPropagationStopped = returnTrue
+    undefined
 
   event.isPropagationStopped = returnFalse
 
@@ -51,6 +52,7 @@ fixEvent = (e) ->
   event.stopImmediatePropagation = () ->
     @isImmediatePropagationStopped = returnTrue
     @.stopPropagation()
+    undefined
 
   event.isImmediatePropagationStopped = returnFalse
 
