@@ -1,5 +1,5 @@
 {
-  "name": "EventArray.js",
+  "name": "EventArray",
   "version": "1.0.0",
   "description": "Treat Events as Arrays that can be mapped, filtered and reduced. ",
   "main": "build/EventArray.min.js",
@@ -26,5 +26,8 @@
     "grunt-contrib-jshint": "^0.10.0",
     "grunt-contrib-uglify": "^0.7.0",
     "grunt-contrib-watch": "^0.6.1"
+  },
+  "dependencies": {
+    "backwards": "0.0.2"
   }
 }
